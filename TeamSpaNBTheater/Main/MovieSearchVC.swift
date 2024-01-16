@@ -11,6 +11,12 @@ class MovieSearchVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.backgroundColor = UIColor(named: "AppMainColor")
+        view.backgroundColor = .appMainColor
     }
+}
+
+extension UIColor {
+    static let appMainColor = UIColor(named: "AppMainColor")
 }
