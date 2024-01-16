@@ -162,7 +162,7 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         // MovieDetailVC 인스턴스 생성
         if let movieDetailVC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailVC") as? MovieDetailVC {
             // 선택된 영화 데이터 전달
-            movieDetailVC.selectedMovie = selectedMovie
+//            movieDetailVC.selectedMovie = selectedMovie
 
             // 내비게이션 스택이 있다면 푸시, 없다면 모달로 화면 전환
             if let navigationController = navigationController {

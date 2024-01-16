@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00E5009E019067C1A499735A /* Pods_TeamSpaNBTheater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E3D052D60129B3CC2CF3D0 /* Pods_TeamSpaNBTheater.framework */; };
 		4E3960012B5502F200327471 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960002B5502F200327471 /* AppDelegate.swift */; };
 		4E3960032B5502F200327471 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960022B5502F200327471 /* SceneDelegate.swift */; };
 		4E3960052B5502F200327471 /* MovieListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960042B5502F200327471 /* MovieListVC.swift */; };
@@ -20,6 +21,8 @@
 		4E39601F2B553FF600327471 /* BookMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E39601E2B553FF600327471 /* BookMovieVC.swift */; };
 		4E3960212B55400F00327471 /* MovieSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960202B55400F00327471 /* MovieSearchVC.swift */; };
 		4E3960232B55402000327471 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960222B55402000327471 /* MyPageVC.swift */; };
+		4E9DF76E2B56CC72007CAD9C /* MovieSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */; };
+		4E9DF7712B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9DF7702B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,11 @@
 		4E39601E2B553FF600327471 /* BookMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMovieVC.swift; sourceTree = "<group>"; };
 		4E3960202B55400F00327471 /* MovieSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchVC.swift; sourceTree = "<group>"; };
 		4E3960222B55402000327471 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchModel.swift; sourceTree = "<group>"; };
+		4E9DF7702B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSpaNBTheater.debug.xcconfig"; path = "Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater.debug.xcconfig"; sourceTree = "<group>"; };
+		A7E3D052D60129B3CC2CF3D0 /* Pods_TeamSpaNBTheater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamSpaNBTheater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSpaNBTheater.release.xcconfig"; path = "Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E5009E019067C1A499735A /* Pods_TeamSpaNBTheater.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +65,8 @@
 			children = (
 				4E395FFF2B5502F200327471 /* TeamSpaNBTheater */,
 				4E395FFE2B5502F200327471 /* Products */,
+				E4DA8DE8E109EB0FC1C36695 /* Pods */,
+				C4F9FF7F9F2B0AC78C54B407 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +81,7 @@
 		4E395FFF2B5502F200327471 /* TeamSpaNBTheater */ = {
 			isa = PBXGroup;
 			children = (
+				4E9DF76C2B56CBCA007CAD9C /* Model */,
 				4E3960142B553D3900327471 /* Login */,
 				4E39601B2B553E7B00327471 /* Main */,
 				4E3960002B5502F200327471 /* AppDelegate.swift */,
@@ -99,9 +111,36 @@
 				4E39601C2B553F0B00327471 /* MovieDetailVC.swift */,
 				4E39601E2B553FF600327471 /* BookMovieVC.swift */,
 				4E3960202B55400F00327471 /* MovieSearchVC.swift */,
+				4E9DF7702B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift */,
 				4E3960222B55402000327471 /* MyPageVC.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		4E9DF76C2B56CBCA007CAD9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4F9FF7F9F2B0AC78C54B407 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7E3D052D60129B3CC2CF3D0 /* Pods_TeamSpaNBTheater.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4DA8DE8E109EB0FC1C36695 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */,
+				F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E3960112B5502F300327471 /* Build configuration list for PBXNativeTarget "TeamSpaNBTheater" */;
 			buildPhases = (
+				B52BAECB07A0DCC4C68493B6 /* [CP] Check Pods Manifest.lock */,
 				4E395FF92B5502F200327471 /* Sources */,
 				4E395FFA2B5502F200327471 /* Frameworks */,
 				4E395FFB2B5502F200327471 /* Resources */,
+				AE0D897AA9C6A1BC1B2EF716 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -171,6 +212,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AE0D897AA9C6A1BC1B2EF716 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B52BAECB07A0DCC4C68493B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeamSpaNBTheater-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4E395FF92B5502F200327471 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -178,6 +261,7 @@
 			files = (
 				4E3960052B5502F200327471 /* MovieListVC.swift in Sources */,
 				4E39601F2B553FF600327471 /* BookMovieVC.swift in Sources */,
+				4E9DF76E2B56CC72007CAD9C /* MovieSearchModel.swift in Sources */,
 				4E3960012B5502F200327471 /* AppDelegate.swift in Sources */,
 				4E3960182B553D9D00327471 /* LogInVC.swift in Sources */,
 				4E3960232B55402000327471 /* MyPageVC.swift in Sources */,
@@ -185,6 +269,7 @@
 				4E3960212B55400F00327471 /* MovieSearchVC.swift in Sources */,
 				4E39601D2B553F0B00327471 /* MovieDetailVC.swift in Sources */,
 				4E3960032B5502F200327471 /* SceneDelegate.swift in Sources */,
+				4E9DF7712B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +411,7 @@
 		};
 		4E3960122B5502F300327471 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,7 +424,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -354,6 +440,7 @@
 		};
 		4E3960132B5502F300327471 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -366,7 +453,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
