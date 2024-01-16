@@ -10,12 +10,12 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     var tableView: UITableView!
 
     // 섹션 타이틀 배열
-    let sectionTitles = ["Popular", "Now playing", "Upcoming"]
+    let sectionTitles = ["Upcoming Movies", "Top Rated Movies", "Popular Movies"]
 
     // 각 섹션의 데이터 배열
-    var popularMovies: [String] = ["Movie1", "Movie2", "Movie3", "Movie4", "Movie5"]
-    var nowPlayingMovies: [String] = ["MovieA", "MovieB", "MovieC", "MovieD", "MovieE"]
-    var upcomingMovies: [String] = ["MovieX", "MovieY", "MovieZ", "MovieW", "MovieV"]
+    var upcomingMoviesData: [Movie] = []
+    var topRatedMoviesData: [Movie] = []
+    var popularMoviesData: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,11 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
         // ViewController에 테이블뷰 추가
         view.addSubview(tableView)
+
+        // API에서 영화 데이터 가져오기
+        fetchMovieData(endpoint: "upcoming", section: 0)
+        fetchMovieData(endpoint: "top_rated", section: 1)
+        fetchMovieData(endpoint: "popular", section: 2)
     }
 
     // MARK: UITableViewDataSource and UITableViewDelegate
@@ -40,6 +45,10 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,13 +64,12 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: cell.contentView.bounds, collectionViewLayout: collectionViewLayout)
-        collectionView.tag = indexPath.section // 셀의 섹션을 태그로 설정
+        collectionView.tag = indexPath.section
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCellIdentifier\(collectionView.tag)")
-        collectionView.backgroundColor = UIColor.yellow
+        collectionView.backgroundColor = UIColor.white
 
-        // 각 셀에 콜렉션뷰 추가
         cell.contentView.addSubview(collectionView)
 
         return cell
@@ -69,7 +77,7 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.systemTeal
+        headerView.backgroundColor = UIColor(hex: 0x6aa3ff)
 
         let titleLabel = UILabel()
         titleLabel.text = sectionTitles[section]
@@ -95,12 +103,12 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
-        case 0: // Popular 섹션의 콜렉션뷰
-            return popularMovies.count
-        case 1: // Now playing 섹션의 콜렉션뷰
-            return nowPlayingMovies.count
-        case 2: // Upcoming 섹션의 콜렉션뷰
-            return upcomingMovies.count
+        case 0: // Upcoming Movies
+            return upcomingMoviesData.count
+        case 1: // Top Rated Movies
+            return topRatedMoviesData.count
+        case 2: // Popular Movies
+            return popularMoviesData.count
         default:
             return 0
         }
@@ -115,25 +123,31 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         }
 
         // 각 셀에 표시할 내용 추가
-        let label = UILabel(frame: cell.contentView.bounds)
-        label.text = ""
+        let movie: Movie
 
         switch collectionView.tag {
-        case 0: // Popular 섹션의 콜렉션뷰
-            label.text = popularMovies[indexPath.item]
-        case 1: // Now playing 섹션의 콜렉션뷰
-            label.text = nowPlayingMovies[indexPath.item]
-        case 2: // Upcoming 섹션의 콜렉션뷰
-            label.text = upcomingMovies[indexPath.item]
+        case 0: // Upcoming Movies
+            movie = upcomingMoviesData[indexPath.item]
+        case 1: // Top Rated Movies
+            movie = topRatedMoviesData[indexPath.item]
+        case 2: // Popular Movies
+            movie = popularMoviesData[indexPath.item]
         default:
-            break
+            return cell
         }
 
-        label.textAlignment = .center
-        cell.contentView.addSubview(label)
+        // 영화 포스터 이미지 표시
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: cell.contentView.bounds.width - 20, height: cell.contentView.bounds.height - 60))
+        loadImage(for: movie, into: imageView)
 
-        // 셀의 배경색을 노란색으로 변경
-        cell.backgroundColor = UIColor.yellow
+        cell.contentView.addSubview(imageView)
+
+        // 영화 제목 표시
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: cell.contentView.bounds.height - 40, width: cell.contentView.bounds.width, height: 30))
+        titleLabel.text = movie.title
+        titleLabel.textAlignment = .center
+        cell.contentView.addSubview(titleLabel)
+        cell.backgroundColor = UIColor.white
 
         return cell
     }
@@ -148,8 +162,114 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = collectionView.bounds.width
+        let cellWidth = (collectionView.bounds.width - 10 * 2) / 2
         let cellHeight = collectionView.bounds.height
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+
+    // 이미지 비동기 로딩
+    func loadImage(for movie: Movie, into imageView: UIImageView) {
+        if let posterPath = movie.posterPath {
+            let posterURL = "https://image.tmdb.org/t/p/w500\(posterPath)"
+            if let url = URL(string: posterURL) {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print("Error loading image: \(error?.localizedDescription ?? "Unknown error")")
+                        return
+                    }
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        imageView.image = image
+                    }
+                }.resume()
+            }
+        }
+    }
+}
+
+// 영화 정보를 담는 모델 클래스
+class Movie {
+    let title: String
+    let posterPath: String?
+
+    init(title: String, posterPath: String?) {
+        self.title = title
+        self.posterPath = posterPath
+    }
+}
+
+// API로부터 영화 데이터를 가져오는 함수
+extension MovieListVC {
+    func fetchMovieData(endpoint: String, section: Int) {
+        let apiKey = "a4da431c6791ead04a4fed52ad08e4fc"
+        let urlString = "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)"
+
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL: \(urlString)")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error fetching movie data: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                print("JSON Data: \(json)")
+
+                if let jsonArray = json as? [String: Any], let results = jsonArray["results"] as? [[String: Any]] {
+                    let movies = self.parseMovieData(jsonArray: results)
+                    DispatchQueue.main.async {
+                        // Update the appropriate section of the collection view with the fetched data
+                        switch section {
+                        case 0:
+                            self.upcomingMoviesData = movies
+                        case 1:
+                            self.topRatedMoviesData = movies
+                        case 2:
+                            self.popularMoviesData = movies
+                        default:
+                            break
+                        }
+
+                        self.tableView.reloadData()
+                    }
+                }
+            } catch {
+                print("Error parsing movie data: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+
+    // JSON 데이터를 파싱하여 Movie 객체 배열로 변환하는 함수
+    func parseMovieData(jsonArray: [[String: Any]]) -> [Movie] {
+        var movies: [Movie] = []
+
+        for movieData in jsonArray {
+            if let title = movieData["title"] as? String,
+               let posterPath = movieData["poster_path"] as? String {
+                let movie = Movie(title: title, posterPath: posterPath)
+                movies.append(movie)
+            }
+        }
+
+        return movies
+    }
+}
+
+extension UIColor {
+    convenience init?(hex: Int, alpha: CGFloat = 1.0) {
+        guard hex >= 0 && hex <= 0xFFFFFF else {
+            return nil
+        }
+
+        self.init(
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
+            alpha: alpha
+        )
     }
 }
