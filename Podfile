@@ -8,6 +8,6 @@ target 'TeamSpaNBTheater' do
   # Pods for TeamSpaNBTheater
 
   pod 'SwiftyJSON'
-  pod 'Kingfisher'
+  pod 'Kingfisher', '7.6.1'
 
 end

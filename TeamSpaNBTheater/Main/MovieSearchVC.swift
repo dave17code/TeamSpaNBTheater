@@ -10,11 +10,13 @@ import SwiftyJSON
 
 class MovieSearchVC: UIViewController {
     
-    // "backdrop_path"와 "title"을 저장할 배열
-    var backdropPaths: [String] = []
-    var titles: [String] = []
+    // 전역 변수로 MovieData 초기화
+    var movieSearchData: [String: String] = [:]
+    var originalMovieData: [String: String] = [:]
+    var filteredMovieData: [String: String] = [:]
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var movieSearchTxField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +24,29 @@ class MovieSearchVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.collectionViewLayout = createLayout()
+        fetchDataNowPlaying()
+        collectionView.reloadData()
+    }
+    
+    @IBAction func movieSearchTxField(_ sender: Any) {
+        // 현재 텍스트 필드의 텍스트에 새로 입력된 문자열 추가
+        let currentText = movieSearchTxField.text ?? ""
         
-        // 페이지 1부터 20까지의 데이터를 가져오기
-        for page in 1...30 {
-            fetchDataFromServer(page: page)
+        if currentText.isEmpty {
+            // 입력 텍스트가 0일 때, 원본 데이터로 복원
+            movieSearchData = originalMovieData
+        } else {
+            // 사용자가 입력한 문자열을 기준으로 필터링
+            let filteredMovies = originalMovieData.filter {
+                $0.value.lowercased().contains(currentText.lowercased())
+            }
+            // 필터링된 결과로 데이터 갱신
+            movieSearchData = filteredMovies
+        }
+        
+        // 메인 스레드에서 컬렉션 뷰 리로드
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
     
@@ -46,56 +67,44 @@ class MovieSearchVC: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    func fetchDataFromServer(page: Int) {
-        let urlString = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=\(page)"
-        
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        
-        // API 키를 헤더에 추가
-        let apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzljOWRkNWQzZmU2OTMxNTA0ZjliY2RlZTkzYThiMSIsInN1YiI6IjY1YTVlNzlmOWJjZDBmMDEyM2JhNTNkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eaOrevC0Rkl_lpQBPFhiF8IgLhhgaq1oa1bxc0Jongs"
-        request.addValue("application/json", forHTTPHeaderField: "accept")
-        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
+    func fetchDataNowPlaying() {
+        // 페이지가 1부터 49까지의 데이터를 가져옴
+        for page in 1...49 {
+            let urlString = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=\(page)"
+            guard let url = URL(string: urlString) else {
+                print("Invalid URL")
                 return
             }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            // SwiftyJSON을 사용하여 데이터 파싱
-            guard let json = try? JSON(data: data) else { return }
-            self.parseJSON(json)
-            
-        }.resume()
-    }
-    
-    func parseJSON(_ json: JSON) {
 
-        // SwiftyJSON을 사용하여 데이터 추출
-        if let results = json["results"].array {
-            for result in results {
-                if let backdropPath = result["backdrop_path"].string {
-                    self.backdropPaths.append(backdropPath)
+            var request = URLRequest(url: url)
+            // API 키를 헤더에 추가
+            let apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzljOWRkNWQzZmU2OTMxNTA0ZjliY2RlZTkzYThiMSIsInN1YiI6IjY1YTVlNzlmOWJjZDBmMDEyM2JhNTNkYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eaOrevC0Rkl_lpQBPFhiF8IgLhhgaq1oa1bxc0Jongs"
+            request.addValue("application/json", forHTTPHeaderField: "accept")
+            request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+            // 비동기적으로 데이터 가져오기
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                // 에러 처리
+                if let data = data {
+                    let json = try! JSON(data: data)
+                    let results = json["results"].arrayValue
+                    
+                    for result in results {
+                        let backdropPath = result["backdrop_path"].stringValue
+                        let title = result["title"].stringValue
+                        
+                        // 딕셔너리에 값을 추가하기 전에 비어있는지 확인
+                        if !backdropPath.isEmpty && !title.isEmpty {
+                            self.movieSearchData[backdropPath] = title
+                            self.originalMovieData[backdropPath] = title
+                        }
+                    }
+                    
+                    // 추가된 데이터 확인
+                    print("Updated Movie Data: \(self.movieSearchData)")
                 }
-                if let title = result["title"].string {
-                    self.titles.append(title)
-                }
-            }
+            }.resume()
         }
-        
-        // 배열에 저장된 데이터 출력
-        print("백드롭 경로 배열: \(self.backdropPaths)")
-        print("제목 배열: \(self.titles)")
     }
 }
 
@@ -106,17 +115,30 @@ extension MovieSearchVC: UICollectionViewDelegate {
 extension MovieSearchVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return titles.count
+        return self.movieSearchData.keys.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieSearchCollectionViewCell
         
         // ImageCell에 데이터 전달하여 설정
-        let imagePath = backdropPaths[indexPath.item]
-        cell.configure(with: imagePath)
-        cell.movieTitle.text = self.titles[indexPath.row]
+        let keyAtIndex = Array(movieSearchData.keys)[indexPath.item]
+        let title = movieSearchData[keyAtIndex] ?? ""
+        cell.configure(with: keyAtIndex) // assuming backdropPath is the key
+        cell.movieTitle.text = title
         
         return cell
+    }
+}
+
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+extension Array {
+    func safeIndex(_ index: Int) -> Element? {
+        return self[safe: index]
     }
 }
