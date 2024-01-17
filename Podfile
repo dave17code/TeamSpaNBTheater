@@ -6,7 +6,6 @@ target 'TeamSpaNBTheater' do
   use_frameworks!
 
   # Pods for TeamSpaNBTheater
-pod 'SnapKit'
-pod 'Then'
+
 
 end
