@@ -7,7 +7,5 @@ target 'TeamSpaNBTheater' do
 
   # Pods for TeamSpaNBTheater
 
-  pod 'SwiftyJSON'
-  pod 'Kingfisher'
 
 end
