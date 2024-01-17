@@ -9,5 +9,7 @@ target 'TeamSpaNBTheater' do
 
   pod 'SwiftyJSON'
   pod 'Kingfisher', '7.6.1'
+  pod 'SnapKit'
+  pod 'Then'
 
 end
