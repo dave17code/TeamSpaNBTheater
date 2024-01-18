@@ -6,6 +6,9 @@ target 'TeamSpaNBTheater' do
   use_frameworks!
 
   # Pods for TeamSpaNBTheater
-
+   pod 'Snapkit',
+   pod 'Then',
+   pod 'SwiftyJSON',
+   pod 'Kingfisher', '7.6.1'
 
 end
