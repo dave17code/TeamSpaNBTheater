@@ -78,6 +78,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="movieSearchTxField:" destination="iy9-an-CLI" eventType="editingChanged" id="y5Q-uT-p23"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNJ-T1-1Wc">
                                         <rect key="frame" x="286.66666666666669" y="26" width="54" height="34"/>
@@ -165,6 +168,7 @@
                     <tabBarItem key="tabBarItem" title="영화 검색" image="magnifyingglass" catalog="system" id="Lax-GE-bKU"/>
                     <connections>
                         <outlet property="collectionView" destination="S9f-3T-LoC" id="d4u-oV-JpT"/>
+                        <outlet property="movieSearchTxField" destination="1cw-wa-oeb" id="PYw-dO-cFm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQi-IY-6M4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -6,33 +6,27 @@
 //
 
 import UIKit
-import SwiftUI
 import SnapKit
 import Then
+import SwiftUI
 
 class BookMovieVC: UIViewController {
-    
-    var book = UILabel()            //"예매하기"
-    var movieName = UILabel()       //"영화명"
+    var book = UILabel()      //“예매하기”
+    var movieName = UILabel()    //“영화명”
     var date = UILabel()
     var person = UILabel()
     var totalPrice = UILabel()
-    
     var movieTitleLabel = UILabel() //예매할 영화 제목 레이블
-    var personLabel = UILabel()     //인원 수 변수 레이블(스테퍼 값)
+    var personLabel = UILabel()   //인원 수 변수 레이블(스테퍼 값)
     var totalPriceLabel = UILabel() //총 가격 변수 레이블
-    
     var personStepper = UIStepper() //인원 수 조정 스테퍼
-    var payButton = UIButton()      //결제 하기 버튼
-    
+    var payButton = UIButton()   //결제 하기 버튼
     let datePicker = UIDatePicker() //날짜선택 Picker
-    let releaseDate = Date()        //영화 개봉일을 담을 변수. 현재: Date() -> 오늘 날짜.
+    let releaseDate = Date()    //영화 개봉일을 담을 변수. 현재: Date() -> 오늘 날짜.
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         setupMainLayoutWithSnapKit()
-        
     }
     
     private func setupMainLayoutWithSnapKit() {
@@ -47,7 +41,6 @@ class BookMovieVC: UIViewController {
         view.addSubview(totalPrice)
         view.addSubview(totalPriceLabel)
         view.addSubview(payButton)
-        
         book.text = "예매하기"
         book.textColor = UIColor(hex: 0x6AA3FF)
         book.textAlignment = .left
@@ -58,7 +51,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-100)
             make.height.equalTo(40)
         }
-        
         movieName.text = "영화명"
         movieName.textAlignment = .left
         movieName.font = UIFont.boldSystemFont(ofSize: 25)
@@ -68,7 +60,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-250)
             make.height.equalTo(40)
         }
-        
         // MovieDetailVC 에서 제목 값 입력 받을 것
         movieTitleLabel.text = "블랙 위도우"
         movieTitleLabel.textAlignment = .right
@@ -79,7 +70,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-30)
             make.height.equalTo(40)
         }
-        
         date.text = "날짜"
         date.textAlignment = .left
         date.font = UIFont.boldSystemFont(ofSize: 25)
@@ -89,7 +79,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-250)
             make.height.equalTo(40)
         }
-        
         let availableBookDays = Calendar.current.date(byAdding: .month, value: 1, to: releaseDate)
         datePicker.minimumDate = releaseDate
         datePicker.maximumDate = availableBookDays
@@ -101,7 +90,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-30)
             make.height.equalTo(40)
         }
-        
         person.text = "인원"
         person.textAlignment = .left
         person.font = UIFont.boldSystemFont(ofSize: 25)
@@ -111,7 +99,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-250)
             make.height.equalTo(40)
         }
-        
         personLabel.text = "1"
         personLabel.textAlignment = .right
         personLabel.font = UIFont.boldSystemFont(ofSize: 25)
@@ -121,7 +108,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-150)
             make.height.equalTo(40)
         }
-        
         personStepper.value = 1
         personStepper.minimumValue = 1
         personStepper.maximumValue = 100
@@ -131,7 +117,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-30)
             make.height.equalTo(40)
         }
-        
         totalPrice.text = "총 가격"
         totalPrice.textAlignment = .left
         totalPrice.font = UIFont.boldSystemFont(ofSize: 25)
@@ -141,7 +126,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-250)
             make.height.equalTo(40)
         }
-        
         totalPriceLabel.text = "5000"+" 원"
         totalPriceLabel.textAlignment = .right
         totalPriceLabel.font = UIFont.boldSystemFont(ofSize: 25)
@@ -151,7 +135,6 @@ class BookMovieVC: UIViewController {
             make.trailing.equalToSuperview().offset(-30)
             make.height.equalTo(40)
         }
-        
         payButton.setTitle("결제 하기", for: .normal)
         payButton.setTitleColor(.white, for: .normal)
         payButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -163,42 +146,29 @@ class BookMovieVC: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
     @objc private func stepperValueChanged(_ sender: UIStepper) {
         // personStepper value -> personLabel 에 update
         personLabel.text = String(Int(sender.value))
-        
         // totalPrice = stepperValue * 영화가격
         totalPriceLabel.text = String(Int(5000*Int(sender.value)))+" 원"
     }
 }
 
-extension UIColor {
-    convenience init(hex: Int, alpha: CGFloat = 1.0) {
-        self.init(
-            red: CGFloat((hex >> 16) & 0xFF) / 255.0,
-            green: CGFloat((hex >> 8) & 0xFF) / 255.0,
-            blue: CGFloat(hex & 0xFF) / 255.0,
-            alpha: alpha
-        )
-    }
-}
-
 struct PreView: PreviewProvider {
-  static var previews: some View {
-    BookMovieVC().toPreview()
-  }
+    static var previews: some View {
+        BookMovieVC().toPreview()
+    }
 }
 extension UIViewController {
-  private struct Preview: UIViewControllerRepresentable {
-      let viewController: UIViewController
-      func makeUIViewController(context: Context) -> UIViewController {
-        return viewController
-      }
-      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-      }
+    private struct Preview: UIViewControllerRepresentable {
+        let viewController: UIViewController
+        func makeUIViewController(context: Context) -> UIViewController {
+            return viewController
+        }
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        }
     }
     func toPreview() -> some View {
-      Preview(viewController: self)
+        Preview(viewController: self)
     }
 }

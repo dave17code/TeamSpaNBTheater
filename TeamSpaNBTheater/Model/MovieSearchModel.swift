@@ -7,6 +7,9 @@
 
 import Foundation
 
-struct MovieSearchModel {
-    
+// 가상의 데이터 모델
+struct MovieSearchData {
+    var backdropPaths: [String]
+    var titles: [String]
+//    var movieDictionary: [String: String]
 }
