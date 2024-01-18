@@ -139,7 +139,6 @@
 				6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */,
 				F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
