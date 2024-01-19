@@ -46,7 +46,7 @@ class BookMovieVC: UIViewController {
     }
     
     private func setupBookMovieDate() {
-        sendDateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        sendDateFormatter.dateFormat = "[yy/MM/dd]"
         sendTimeFormatter.dateFormat = "HH시 mm분"
         
         sendDateFormatter.timeZone = TimeZone(abbreviation: "UTC")

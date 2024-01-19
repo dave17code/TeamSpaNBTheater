@@ -11,16 +11,23 @@ class MyPageVC: UIViewController {
     
     // 현재 로그인한 사용자 정보
     var user: UserInfo?
-
+    
+    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userIdLabel.text = loadUserData().userInfo?.userId
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 예매 내역 동적으로 가져와서 출력
-        loadUserData()
+        // 예매 내역은 마이페이지에 진입할 때마다 테이블뷰에 업데이트
+        user = loadUserData().userInfo
+        tableView.reloadData()
     }
     
     func loadUserData() -> (userInfo: UserInfo?, reservations: [MovieReservation]?) {
@@ -54,5 +61,29 @@ class MyPageVC: UIViewController {
             print("Error decoding user data: \(error.localizedDescription)")
             return (nil, nil)
         }
+    }
+}
+
+extension MyPageVC: UITableViewDelegate {
+    
+}
+
+extension MyPageVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.user?.movieReservations.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyPageTableViewCell.identifier, for: indexPath) as? MyPageTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.bookMovieDate.text = self.user?.movieReservations[indexPath.row].reservationDate
+        cell.bookMovieTitle.text = self.user?.movieReservations[indexPath.row].movieTitle
+        cell.bookPepleCount.text = String("(\(self.user?.movieReservations[indexPath.row].totalPeople ?? 0))인")
+        cell.bookMovieStartTime.text = self.user?.movieReservations[indexPath.row].reservationTime
+        
+        return cell
     }
 }
