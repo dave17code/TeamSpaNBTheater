@@ -14,7 +14,7 @@
         <!--영화 목록-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MovieListVC" customModule="TeamSpaNBTheater" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieListVC" id="BYZ-38-t0r" customClass="MovieListVC" customModule="TeamSpaNBTheater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
         <!--Book MovieVC-->
         <scene sceneID="YAW-7s-AQh">
             <objects>
-                <viewController id="bDz-9e-Oij" customClass="BookMovieVC" customModule="TeamSpaNBTheater" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookMovieVC" id="bDz-9e-Oij" customClass="BookMovieVC" customModule="TeamSpaNBTheater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e49-AR-Mbr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="e5h-iT-S70">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Dnw-PZ-Qpi" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Dnw-PZ-Qpi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lcj-C3-Lab">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

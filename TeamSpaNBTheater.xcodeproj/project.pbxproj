@@ -23,6 +23,7 @@
 		4E3960232B55402000327471 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3960222B55402000327471 /* MyPageVC.swift */; };
 		4E9DF76E2B56CC72007CAD9C /* MovieSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */; };
 		4E9DF7712B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9DF7702B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift */; };
+		4EC419BE2B595B250045FCFE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC419BD2B595B250045FCFE /* UserInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		4E3960222B55402000327471 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchModel.swift; sourceTree = "<group>"; };
 		4E9DF7702B56D56E007CAD9C /* MovieSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EC419BD2B595B250045FCFE /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSpaNBTheater.debug.xcconfig"; path = "Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater.debug.xcconfig"; sourceTree = "<group>"; };
 		A7E3D052D60129B3CC2CF3D0 /* Pods_TeamSpaNBTheater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamSpaNBTheater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSpaNBTheater.release.xcconfig"; path = "Target Support Files/Pods-TeamSpaNBTheater/Pods-TeamSpaNBTheater.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				4E9DF76D2B56CC72007CAD9C /* MovieSearchModel.swift */,
+				4EC419BD2B595B250045FCFE /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,7 +142,6 @@
 				6F28817218F743C425F21810 /* Pods-TeamSpaNBTheater.debug.xcconfig */,
 				F5EC6CC7B6A3FBE6DA7C235A /* Pods-TeamSpaNBTheater.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -263,6 +265,7 @@
 				4E39601F2B553FF600327471 /* BookMovieVC.swift in Sources */,
 				4E9DF76E2B56CC72007CAD9C /* MovieSearchModel.swift in Sources */,
 				4E3960012B5502F200327471 /* AppDelegate.swift in Sources */,
+				4EC419BE2B595B250045FCFE /* UserInfo.swift in Sources */,
 				4E3960182B553D9D00327471 /* LogInVC.swift in Sources */,
 				4E3960232B55402000327471 /* MyPageVC.swift in Sources */,
 				4E39601A2B553DB400327471 /* SignUpVC.swift in Sources */,
