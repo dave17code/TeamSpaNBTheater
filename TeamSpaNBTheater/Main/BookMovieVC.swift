@@ -11,6 +11,9 @@ import Then
 import SwiftUI
 
 class BookMovieVC: UIViewController {
+    // 여기에 사용자 정보를 프린트하는 코드 추가
+    var loggedInUserInfo: UserInfo?
+    
     // MARK: 화면 고정 레이블(변하지 않는 문구)
     let book = UILabel()               //“예매하기”
     let movieName = UILabel()          //“영화명”
@@ -206,11 +209,71 @@ class BookMovieVC: UIViewController {
         print("총 인원 : ", Int(personStepper.value))
         print("총 가격 : ", Int(5000*Int(personStepper.value)))
         
-        // ****************************여기서 Pypage로 값 전달하면 됨
-        // ****************************여기서 Pypage로 값 전달하면 됨
-        // ****************************여기서 Pypage로 값 전달하면 됨
-        // ****************************여기서 Pypage로 값 전달하면 됨
-        // ****************************여기서 Pypage로 값 전달하면 됨
+        let payAskAlert = UIAlertController(title: "\(movieTitle)", message: "이 영화를 예매하시겠습니까?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "예매", style: .default) { [weak self] _ in
+            self?.payComplete()
+        }
+        let cancelACtion = UIAlertAction(title: "취소", style: .default, handler: nil)
+        payAskAlert.addAction(okAction)
+        payAskAlert.addAction(cancelACtion)
+        present(payAskAlert, animated: true, completion: nil)
+    }
+    
+    // 사용자 정보를 불러오는 함수
+    func loadUsers() -> [String: UserInfo]? {
+        if let data = UserDefaults.standard.data(forKey: "users") {
+            do {
+                let users = try JSONDecoder().decode([String: UserInfo].self, from: data)
+                return users
+            } catch {
+                print("Error decoding user data: \(error.localizedDescription)")
+            }
+        }
+        return nil
+    }
+    
+    // 사용자 정보를 저장하는 함수
+    private func saveUsers(users: [String: UserInfo]) {
+        do {
+            let encodedData = try JSONEncoder().encode(users)
+            UserDefaults.standard.set(encodedData, forKey: "users")
+        } catch {
+            print("Error encoding user data: \(error.localizedDescription)")
+        }
+    }
+    
+    private func payComplete() {
+        let payCompletionAlert = UIAlertController(title: "예매 성공", message: "이용해주셔서 감사합니다.", preferredStyle: .alert)
+        let payAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            // 예매 정보 생성
+            let reservation = MovieReservation(
+                movieTitle: self.movieTitle,
+                releaseDate: self.sendDateString,
+                reservationDate: self.sendDateString,  // 예매 날짜를 임시로 sendDateString로 사용
+                reservationTime: self.sendTimeString,
+                totalPeople: Int(self.personStepper.value),
+                price: Double(5000 * Int(self.personStepper.value))
+            )
+            
+            // 현재 로그인한 사용자 정보 불러오기
+            guard let userId = UserDefaults.standard.string(forKey: "loggedInUserId"),
+                  var users = self.loadUsers(),
+                  let userInfo = users[userId] else {
+                print("Error loading user information.")
+                return
+            }
+            
+            // 예매 정보를 사용자 정보에 추가
+            userInfo.movieReservations.append(reservation)
+            users[userId] = userInfo
+            
+            // 사용자 정보 저장
+            self.saveUsers(users: users)
+        }
+        payCompletionAlert.addAction(payAction)
+        present(payCompletionAlert, animated: true, completion: nil)
     }
     
     // 캘린더를 통해 datePicker의 값이 변경될 때 호출되는 함수
