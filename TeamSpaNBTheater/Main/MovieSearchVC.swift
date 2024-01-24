@@ -25,6 +25,10 @@ class MovieSearchVC: UIViewController {
         collectionView.dataSource = self
         collectionView.collectionViewLayout = createLayout()
         fetchDataNowPlaying()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         collectionView.reloadData()
     }
     

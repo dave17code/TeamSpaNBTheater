@@ -14,17 +14,16 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        passwordTxField.isSecureTextEntry = true
     }
     
     @IBAction func signUpVC(_ sender: Any) {
-        // 입력된 userId와 password를 가져와서 UserInfo 객체 생성
         guard let userId = userIdTxField.text, let password = passwordTxField.text else {
             showAlert(message: "입력된 정보가 올바르지 않습니다.")
             return
         }
         
+        // 입력된 userId와 password를 가져와서 UserInfo 객체 생성
         let userInfo = UserInfo(userId: userId, password: password)
         
         // UserDefaults에서 저장된 회원 정보를 가져옴

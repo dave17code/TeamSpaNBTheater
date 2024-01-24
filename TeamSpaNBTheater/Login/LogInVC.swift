@@ -95,6 +95,4 @@ class LogInVC: UIViewController {
         // UserDefaults에 loggedInUserId 키로 사용자의 아이디 저장
         UserDefaults.standard.set(userId, forKey: "loggedInUserId")
     }
-    
-
 }

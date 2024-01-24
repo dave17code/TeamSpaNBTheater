@@ -62,7 +62,6 @@ class MovieListVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         }
     }
     
-    
     // MARK: UITableViewDataSource and UITableViewDelegate
     
     func numberOfSections(in tableView: UITableView) -> Int {

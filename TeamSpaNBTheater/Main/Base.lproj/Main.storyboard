@@ -70,11 +70,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf3-cU-VYJ">
                                 <rect key="frame" x="0.0" y="59" width="393" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cw-wa-oeb">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="영화 제목을 검색해주세요" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cw-wa-oeb">
                                         <rect key="frame" x="111.66666666666669" y="26" width="170" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="PIo-Io-4xL"/>
-                                            <constraint firstAttribute="width" constant="170" id="glC-tW-WVX"/>
+                                            <constraint firstAttribute="width" constant="170" id="6pl-1O-Ygr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -82,25 +81,22 @@
                                             <action selector="movieSearchTxField:" destination="iy9-an-CLI" eventType="editingChanged" id="y5Q-uT-p23"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNJ-T1-1Wc">
-                                        <rect key="frame" x="286.66666666666669" y="26" width="54" height="34"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="doc.text.magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zvz-yc-jSS">
+                                        <rect key="frame" x="286.66666666666669" y="26.333333333333329" width="37" height="35"/>
+                                        <color key="tintColor" red="0.41568627949999998" green="0.63921570780000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="ios-TM-eKE"/>
-                                            <constraint firstAttribute="width" constant="54" id="kG9-gu-q8g"/>
+                                            <constraint firstAttribute="width" constant="37" id="h60-Do-rOy"/>
+                                            <constraint firstAttribute="height" constant="34" id="muu-Jy-eqy"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="검색">
-                                            <color key="baseBackgroundColor" red="0.41568627450980389" green="0.63921568627450975" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </buttonConfiguration>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="1cw-wa-oeb" secondAttribute="bottom" id="6SH-Mc-hoA"/>
                                     <constraint firstAttribute="height" constant="60" id="Eds-h9-B8K"/>
-                                    <constraint firstItem="mNJ-T1-1Wc" firstAttribute="leading" secondItem="1cw-wa-oeb" secondAttribute="trailing" constant="5" id="GBr-CJ-f9j"/>
-                                    <constraint firstItem="1cw-wa-oeb" firstAttribute="centerX" secondItem="Qf3-cU-VYJ" secondAttribute="centerX" id="Gib-CD-k5Z"/>
-                                    <constraint firstAttribute="bottom" secondItem="mNJ-T1-1Wc" secondAttribute="bottom" id="n7O-OQ-TNK"/>
+                                    <constraint firstItem="1cw-wa-oeb" firstAttribute="centerX" secondItem="Qf3-cU-VYJ" secondAttribute="centerX" id="I4w-qN-Ru8"/>
+                                    <constraint firstItem="zvz-yc-jSS" firstAttribute="leading" secondItem="1cw-wa-oeb" secondAttribute="trailing" constant="5" id="ZWO-KZ-7bc"/>
+                                    <constraint firstAttribute="bottom" secondItem="1cw-wa-oeb" secondAttribute="bottom" id="dUV-tC-jAY"/>
+                                    <constraint firstAttribute="bottom" secondItem="zvz-yc-jSS" secondAttribute="bottom" id="qrJ-CZ-XIu"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S9f-3T-LoC">
@@ -328,6 +324,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="doc.text.magnifyingglass" catalog="system" width="110" height="128"/>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
